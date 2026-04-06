@@ -11,7 +11,7 @@ A collection of Python scripts for various purposes to aid digital forensics ana
 | Script | Description / Input Type |
 |--------|--------------------------|
 | parse_webAccess.py | Web access logs (access.log) with optional browser history CSV |
-| parse_ipCmdCount.py | Command-line history files (e.g. `.bash_history`) with IP address extraction |
+| ipCmdCount.py | Command-line history files (e.g. `.bash_history`) with IP address extraction |
 | lookup_ipinfo_batch.py | CSV of IP addresses for batch enrichment using IPinfo API |
 | query_url.py | CSV of URLs for HTTP status code queries |
 | csv_filter_columnString.py | Filter CSV rows by substring match in a specified column |
@@ -108,7 +108,7 @@ python3 parse_webAccess.py -d logs/ -u history.csv --time-delta 5 --force-utc --
 </details>
 
 <details>
-<summary><strong>parse_ipCmdCount.py</strong></summary>
+<summary><strong>ipCmdCount.py</strong></summary>
 
 ---
 
@@ -163,15 +163,15 @@ Generates counts of command usage per IP and supports structured CSV or Excel ou
 
 #### Basic CSV Output
 ```bash
-python3 parse_ipCmdCount.py -f .bash_history
+python3 ipCmdCount.py -f .bash_history
 ```
 #### Combine Counts Per IP
 ```bash
-python3 parse_ipCmdCount.py -f .bash_history --combine
+python3 ipCmdCount.py -f .bash_history --combine
 ```
 #### Excel Output (Multi-Sheet)
 ```bash
-python3 parse_ipCmdCount.py -f .bash_history -x
+python3 ipCmdCount.py -f .bash_history -x
 ```
 ---
 </details>
@@ -326,7 +326,7 @@ python3 csv_filter_columnString.py <input_file> <output_file> <column_name> <sea
 </details>
 
 <details>
-<summary><strong>merge_filter_csv_fields.py</strong></summary>
+<summary><strong>csv_merge_selectedFields.py</strong></summary>
 
 ---
 
@@ -384,7 +384,7 @@ python csv_merge_selectedFields.py -d /path/to/csvs -f fields.txt
 </details>
 
 <details>
-<summary><strong>merge_csv_files.py</strong></summary>
+<summary><strong>csv_merge.py</strong></summary>
 
 ---
 
