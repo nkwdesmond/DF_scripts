@@ -188,10 +188,10 @@ Processes IPs in batches and outputs structured enrichment data (e.g., geo, ASN)
 ---
 
 ### ✨ Features
-- Batch enrichment using IPinfo API (efficient for large datasets)
+- Batch enrichment using IPinfo API (efficient for large datasets) via POST requests
 - Automatically removes duplicate IPs while preserving order
 - Handles API errors and missing data gracefully
-- Dynamically builds output fields based on API response
+- Extracts JSON fields from API response and dynamically builds output fields (expands nested dictionaries)
 - Supports large datasets via chunking (default: 1000 IPs per batch)
 
 ---
