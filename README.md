@@ -17,6 +17,7 @@ A collection of Python scripts for various purposes to aid digital forensics ana
 | csv_filter_columnString.py | Filter CSV rows by substring match in a specified column |
 | csv_merge_selectedFields.py | Merge multiple CSV files and retain only specified fields |
 | csv_merge.py | Merge all CSV files in a directory into one CSV |
+| search_btmpwtmp.sh | Search `wtmp`, `btmp`, including rotated/compressed variants for specific IP addresses or keywords |
 
 ## 📜 Scripts
 
@@ -435,5 +436,80 @@ Useful for combining datasets with identical structures into one file for analys
 ```bash
 python csv_merge.py -d /path/to/csvs
 ```
+---
+</details>
+
+<details>
+<summary><strong>search_btmpwtmp.sh</strong></summary>
+
+---
+
+### 📌 Description
+Parses Linux authentication log files (`wtmp`, `btmp`, including rotated/compressed variants) to search for login activity matching specific IP addresses or keywords.  
+Supports both plain and gzipped log files, and can either output matching entries or list files containing matches.
+
+---
+
+### ✨ Features
+- Identifies authentication logs (`wtmp`, `btmp`, including rotated/compressed variants)
+- Uses `last` for `wtmp` logs
+- Uses `lastb` for `btmp` logs (failed login attempts)
+- Supports compressed `.gz` log files via `zcat`
+- Keyword/IP filtering with comma-separated patterns
+- Regex-based OR matching across multiple search terms
+- Efficient streaming (no intermediate file storage)
+- Optional filename-only listing mode for fast discovery
+- Safe command execution without `eval`
+- Handles missing or non-existent log files gracefully
+
+---
+
+### 📂 File Parsed
+- `wtmp`, `btmp`, including rotated/compressed variants (`*.gz`)
+
+---
+
+### 🤖 Auto Detect File Names in Directory
+- Yes  
+- Automatically scans for:
+  - `wtmp`
+  - `wtmp-*`
+  - `btmp`
+  - `btmp-*`
+
+---
+
+### 📍 Output Behavior
+- Default: prints matching log entries to **stdout**
+- Optional: prints only filenames containing matches
+
+---
+
+### 🚩 Flags
+
+- `-d` → Target directory containing log files  
+- `-s` → Comma-separated search terms (IP addresses or keywords) (logical OR)
+- `-l` → List-only mode (prints filenames containing matches, not log entries)
+
+---
+
+### 🚀 Usage
+
+#### Search default IP in log directory
+```bash
+./parse_wtmp_btmp.sh -d /var/log
+````
+#### Search multiple IPs / keywords
+```bash
+./parse_wtmp_btmp.sh -d /var/log -s "192.168.123.123,10.0.0.123,admin"
+````
+#### List only files containing matches
+```bash
+./parse_wtmp_btmp.sh -d /var/log -l
+````
+#### Advanced usage (multi-keyword search)
+```bash
+./parse_wtmp_btmp.sh -d /var/log -s "root,failed login,123.123.123.123"
+````
 ---
 </details>
